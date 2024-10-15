@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Template</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+        }
+        header {
+            background-color: #2e86c1;
+            width: 100%;
+            padding: 15px 0;
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            position: relative; /* For positioning the logo */
+        }
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+        }
+        .slogan {
+            font-size: 1.1em;
+            color: #e0e0e0;
+            margin-top: 5px;
+        }
+        .nav-buttons {
+            margin-top: 10px;
+        }
+        .nav-buttons a {
+            color: white;
+            text-decoration: none;
+            background-color: #2e86c1;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+        }
+        .nav-buttons a:hover {
+            background-color: #1e628f;
+        }
+        .cv-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+            color: #2e86c1;
+        }
+        .header h3 {
+            margin: 5px 0;
+            color: #333;
+            font-weight: normal;
+        }
+        .section-title {
+            font-size: 1.4em;
+            color: #2e86c1;
+            border-bottom: 2px solid #2e86c1;
+            margin-top: 20px;
+            padding-bottom: 5px;
+        }
+        .section-content {
+            margin-top: 10px;
+        }
+        .section-content p {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .skills-list li {
+            background-color: #e1f5fe;
+            color: #2e86c1;
+            padding: 8px 12px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .download-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: #2e86c1;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            margin-top: 20px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .download-btn:hover {
+            background-color: #1e628f;
+        }
+    </style>
+    <script>
+        function confirmDownload() {
+            const confirmation = confirm("Do you want to download the CV?");
+            if (confirmation) {
+                window.location.href = "{% url 'resume_pdf' profile.id %}"; // Use the URL template tag
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">IcvI</div>
+        <div class="slogan">Your Career Starts Here</div>
+        <div class="nav-buttons">
+            <a href="/">Home</a>
+            <a href="/cvs">CVs</a>
+        </div>
+    </header>
+
+    <div class="cv-container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>{{ profile.name }}</h1>
+            <h3>Email: {{ profile.email }} | Phone: {{ profile.phone }}</h3>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="summary">
+            <h2 class="section-title">Professional Summary</h2>
+            <div class="section-content">
+                <p>{{ profile.summary }}</p>
+            </div>
+        </div>
+
+        <!-- Education Section -->
+        <div class="education">
+            <h2 class="section-title">Education</h2>
+            <div class="section-content">
+                <p><strong>Degree:</strong> {{ profile.degree }}</p>
+                <p><strong>School:</strong> {{ profile.school }}</p>
+                <p><strong>University:</strong> {{ profile.university }}</p>
+            </div>
+        </div>
+
+        <!-- Work Experience Section -->
+        <div class="work-experience">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="section-content">
+                <p>{{ profile.prev_work }}</p>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="section-content">
+                <ul class="skills-list">
+                    {% for skill in skills_list %}
+                    <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Download Button -->
+        <button class="download-btn" onclick="confirmDownload()">Download CV as PDF</button>
+    </div>
+</body>
+</html>

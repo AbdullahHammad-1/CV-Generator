@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ profile.name }} - CV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f6f9;
+        }
+        .cv-container {
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+            color: #2e86c1;
+        }
+        .header h3 {
+            margin: 5px 0;
+            color: #333;
+            font-weight: normal;
+        }
+        .section-title {
+            font-size: 1.4em;
+            color: #2e86c1;
+            border-bottom: 2px solid #2e86c1;
+            margin-top: 20px;
+            padding-bottom: 5px;
+        }
+        .section-content {
+            margin-top: 10px;
+        }
+        .section-content p {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+        .skills-list {
+            display: flex; /* Use flexbox to align items */
+            flex-wrap: wrap; /* Allow wrapping to the next line */
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .skills-list li {
+            background-color: #e1f5fe;
+            color: #2e86c1;
+            padding: 8px 12px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            display: inline-block; /* Ensure skills are inline */
+        }
+
+      /* New CSS for print styles */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact; /* Ensure colors are printed exactly as in the view */
+            }
+            .cv-container {
+                page-break-after: always; /* Ensure each CV section starts on a new page */
+            }
+            .section-content {
+                page-break-inside: avoid; /* Prevent page breaks inside this section */
+            }
+            .skills-list {
+                page-break-inside: avoid; /* Prevent page breaks inside the skills list */
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <div class="header">
+            <h1>{{ profile.name }}</h1>
+            <h3>Email: {{ profile.email }} | Phone: {{ profile.phone }}</h3>
+        </div>
+        <div class="summary">
+            <h2 class="section-title">Professional Summary</h2>
+            <div class="section-content">
+                <p>{{ profile.summary }}</p>
+            </div>
+        </div>
+        <div class="education">
+            <h2 class="section-title">Education</h2>
+            <div class="section-content">
+                <p><strong>Degree:</strong> {{ profile.degree }}</p>
+                <p><strong>School:</strong> {{ profile.school }}</p>
+                <p><strong>University:</strong> {{ profile.university }}</p>
+            </div>
+        </div>
+        <div class="work-experience">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="section-content">
+                <p>{{ profile.prev_work }}</p>
+            </div>
+        </div>
+        <div class="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="section-content">
+                <ul class="skills-list">
+                    {% for skill in skills_list %}
+                    <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past CVs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #2e86c1;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            transition: background-color 0.3s;
+        }
+
+        header:hover {
+            background-color: #1e628f;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .cv-list {
+            display: flex;
+            flex-direction: column; /* Items in a single column */
+            align-items: center; /* Center items */
+            gap: 20px; /* Space between items */
+        }
+
+        .cv-item, .back-button {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px; /* Increased padding for better spacing */
+            text-decoration: none;
+            color: #2e86c1;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            width: 100%; /* Full width for each item */
+            max-width: 600px; /* Maximum width for each item */
+        }
+
+        .cv-item:hover, .back-button:hover {
+            background-color: #e1f5fe;
+            transform: translateY(-5px); /* Slight upward motion on hover */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+        }
+
+        .back-button {
+            background-color: #2e86c1; /* Base color for button */
+            color: white; /* Text color */
+            border: none; /* No border */
+            padding: 10px 20px; /* Padding for button */
+            font-size: 1.2em; /* Font size */
+            cursor: pointer; /* Pointer cursor on hover */
+            margin-top: 20px; /* Margin above button */
+            transition: background-color 0.3s, transform 0.3s; /* Transition effects */
+        }
+
+        .back-button:hover {
+            background-color: #1e628f; /* Darker color on hover */
+            transform: scale(1.05); /* Slightly enlarge the button on hover */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Past CVs</h1>
+    <p>Click on a CV to view it</p>
+</header>
+
+<div class="container">
+    <div class="cv-list">
+        {% for profile in profiles %}
+        <a href="{% url 'resume' profile.id %}" class="cv-item">{{ profile.name }}</a>
+        {% endfor %}
+    </div>
+    <div class="cv-list">
+        <a href="/" class="back-button">Back to Home</a>
+    </div>
+
+</div>
+
+</body>
+</html>

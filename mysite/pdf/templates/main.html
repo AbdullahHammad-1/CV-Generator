@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IcvI - CV Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: #2e86c1;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            position: relative; /* Position for absolute elements */
+        }
+        .home-button {
+            position: absolute; /* Positioning it inside the header */
+            left: 20px; /* Align to the left */
+            top: 50%; /* Center vertically */
+            transform: translateY(-50%); /* Adjust position */
+            background-color: #fff; /* Button background */
+            color: #2e86c1; /* Button text color */
+            padding: 10px 15px; /* Button padding */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            text-decoration: none; /* No underline */
+            transition: background-color 0.3s; /* Transition for hover effect */
+        }
+        .home-button:hover {
+            background-color: #e1f5fe; /* Change color on hover */
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        .form-container h2 {
+            color: #2e86c1;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .submit-btn {
+            width: 100%;
+            background-color: #2e86c1;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #1e628f;
+        }
+    </style>
+    <script>
+        function confirmSubmission(event) {
+            // Show a confirmation alert
+            const userConfirmed = confirm("Are you sure about your information?");
+
+            if (!userConfirmed) {
+                // If the user clicks "Cancel", prevent form submission
+                event.preventDefault();
+            } else {
+                // Optional: Redirect to a success page after a slight delay (for illustration purposes)
+                setTimeout(function() {
+                    window.location.href = "/resume/<int:id>";  // Change this to your desired redirect URL
+                }, 100); // Short delay to allow form submission to process
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <a href="/" class="home-button">Home</a>
+        IcvI - CV Generator
+    </header>
+    <div class="form-container">
+        <h2>Enter Your Details</h2>
+        <form action="" method="POST" onsubmit="confirmSubmission(event)">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" maxlength="200" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" maxlength="200" placeholder="example@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" maxlength="200" placeholder="+1 234 567 890" required>
+            </div>
+            <div class="form-group">
+                <label for="summary">Professional Summary</label>
+                <textarea id="summary" name="summary" placeholder="Brief summary about yourself and your career goals." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="degree">Degree</label>
+                <input type="text" id="degree" name="degree" maxlength="200" placeholder="Bachelor of Science in Computer Engineering" required>
+            </div>
+            <div class="form-group">
+                <label for="school">School</label>
+                <input type="text" id="school" name="school" maxlength="200" placeholder="e.g., High School Name" required>
+            </div>
+            <div class="form-group">
+                <label for="university">University</label>
+                <input type="text" id="university" name="university" maxlength="200" placeholder="e.g., Harvard University" required>
+            </div>
+            <div class="form-group">
+                <label for="prev_work">Previous Work Experience</label>
+                <textarea id="prev_work" name="prev_work" placeholder="List previous job titles, companies, and key achievements." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="skills">Skills</label>
+                <textarea id="skills" name="skills" placeholder="List skills relevant to your field." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Generate CV</button>
+        </form>
+    </div>
+</body>
+</html>
